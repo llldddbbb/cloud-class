@@ -1,0 +1,20 @@
+
+server:
+  port: 7006
+spring:
+  application:
+    name: cloud-gateway
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka/
+zuul:
+  ignored-services: "*"
+  sensitive-headers:
+  routes:
+      auth:
+        path: /auth/**
+        serviceId: cloud-auth
+      user:
+        path: /course/**
+        serviceId: cloud-course

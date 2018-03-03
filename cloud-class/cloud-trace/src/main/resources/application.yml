@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: cloud-trace
+
+server:
+  port: 7005
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+      service-url:
+        defaultZone: http://localhost:7001/eureka/
+
+security:
+  user:
+    name: admin
+    password: admin

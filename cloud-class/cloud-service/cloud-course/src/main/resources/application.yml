@@ -1,0 +1,19 @@
+server:
+  port: 8000
+spring:
+  application:
+    name: cloud-course
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/cloud_course
+    username: root
+    password: 123456
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka/
+mybatis:
+    mapperLocations: classpath:mappers/*.xml
+home:
+  course:
+    pageSize: 8

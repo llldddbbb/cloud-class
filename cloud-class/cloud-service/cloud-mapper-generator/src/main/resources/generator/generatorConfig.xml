@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<!--Mybatis逆向工程配置文件-->
+<!--运行方法:在项目目录下运行mvn mybatis-generator:generate-->
+<generatorConfiguration>
+
+    <context id="Mysql" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+
+        <!--使用通用Mapper插件，指定MyMapper路径-->
+        <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+            <property name="mappers" value="cn.dblearn.cloud.common.entity.MyMapper"/>
+        </plugin>
+
+        <commentGenerator>
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+            <property name="suppressAllComments" value="true" />
+        </commentGenerator>
+
+
+        <!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/cloud_course"
+                        userId="root"
+                        password="123456">
+        </jdbcConnection>
+
+        <!-- 生成PO类的位置 -->
+        <javaModelGenerator targetPackage="cn.dblearn.cloud.course.entity" targetProject="src/main/java"/>
+
+        <!-- mapper映射文件生成的位置 -->
+        <sqlMapGenerator targetPackage="mappers/" targetProject="src/main/resources"/>
+
+        <!-- targetPackage：mapper接口生成的位置 -->
+        <javaClientGenerator targetPackage="cn.dblearn.cloud.course.dao" targetProject="src/main/java"
+                             type="XMLMAPPER"/>
+
+        <!-- 指定数据库表 -->
+        <table schema="MYSQL" tableName="course">
+            <!--true使用原列名，false:下划线转换成驼峰形式-->
+            <property name="useActualColumnNames" value="false" />
+        </table>
+    </context>
+</generatorConfiguration>

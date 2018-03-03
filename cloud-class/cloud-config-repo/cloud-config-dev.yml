@@ -1,0 +1,11 @@
+## eureka 服务发现
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:7001/eureka/
+
+spring:
+  cloud:
+    config:
+      allowOverride: true
+      overrideNone: true

@@ -1,0 +1,34 @@
+server:
+  port: 7003
+
+spring:
+  application:
+    name: cloud-monitor
+turbine:
+  stream:
+    port: 7004
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    metadata-map:
+          user.name: ${security.user.name}
+          user.password: ${security.user.password}
+  client:
+      service-url:
+        defaultZone: http://localhost:7001/eureka/
+  boot:
+    admin:
+      routes:
+        endpoints: env,metrics,trace,dump,jolokia,info,configprops,trace,logfile,refresh,flyway,liquibase,heapdump,loggers,auditevents,hystrix.stream
+      turbine:
+        clusters: default
+        location: http://localhost:${turbine.stream.port}
+
+security:
+  user:
+    name: admin
+    password: admin
+logging:
+  level:
+    org.springframework.cloud.netflix.zuul.filters.post.SendErrorFilter: error

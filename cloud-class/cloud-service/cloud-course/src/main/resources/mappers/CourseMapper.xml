@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.dblearn.cloud.course.dao.CourseMapper">
+  <resultMap id="BaseResultMap" type="cn.dblearn.cloud.course.entity.Course">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="cover_image" jdbcType="VARCHAR" property="coverImage" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="page_view" jdbcType="BIGINT" property="pageView" />
+    <result column="price" jdbcType="DOUBLE" property="price" />
+    <result column="discount_price" jdbcType="DOUBLE" property="discountPrice" />
+    <result column="is_hot" jdbcType="TINYINT" property="isHot" />
+    <result column="is_boutique" jdbcType="TINYINT" property="isBoutique" />
+    <result column="category_id" jdbcType="INTEGER" property="categoryId" />
+    <result column="teacher_id" jdbcType="INTEGER" property="teacherId" />
+    <result column="course_detail" jdbcType="LONGVARCHAR" property="courseDetail" />
+    <result column="publish_time" jdbcType="TIMESTAMP" property="publishTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+
+  <sql id="homeBaseSQL">
+    id,title,cover_image,description,page_view,is_hot,is_boutique
+  </sql>
+
+  <select id="listRecentCourse" resultMap="BaseResultMap">
+    SELECT <include refid="homeBaseSQL"/> FROM course order by publish_time desc
+  </select>
+
+  <select id="listBoutiqueCourse" resultMap="BaseResultMap">
+    SELECT <include refid="homeBaseSQL"/> FROM course WHERE is_boutique=1 ORDER BY publish_time desc
+  </select>
+
+  <select id="listHotCourse" resultMap="BaseResultMap">
+    SELECT <include refid="homeBaseSQL"/> FROM course WHERE is_hot=1 ORDER BY publish_time desc
+  </select>
+</mapper>

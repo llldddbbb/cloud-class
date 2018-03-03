@@ -1,0 +1,25 @@
+server:
+  port: 7007
+spring:
+  application:
+    name: cloud-auth
+  jackson:
+    serialization:
+      INDENT_OUTPUT: true
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/cloud_auth?autoReconnect=true&useSSL=false
+    username: root
+    password: 123456
+
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+
+jwt:
+  header: Authorization
+  secret: mySecret
+  expiration: 604800
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka/

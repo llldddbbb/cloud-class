@@ -1,0 +1,19 @@
+server:
+  port: 7002
+
+spring:
+  application:
+    name: cloud-config
+  cloud:
+      config:
+        server:
+          git:
+            uri: https://github.com/llldddbbb/cloud-class
+            searchPaths: cloud-config-repo
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:7001/eureka/
