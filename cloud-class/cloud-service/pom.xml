@@ -11,6 +11,7 @@
     <modules>
         <module>cloud-mapper-generator</module>
         <module>cloud-course</module>
+        <module>cloud-user</module>
     </modules>
 
     <artifactId>cloud-service</artifactId>
@@ -51,6 +52,11 @@
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper-spring-boot-starter</artifactId>
             <version>${pageHelper.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-feign</artifactId>
         </dependency>
     </dependencies>
 

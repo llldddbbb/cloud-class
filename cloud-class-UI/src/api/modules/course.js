@@ -22,3 +22,26 @@ export function getHotCourseList () {
     method: 'get'
   })
 }
+// 根据Id获取课程详情
+export function getCourseDetailById (courseId) {
+  return request({
+    url: requestUrl('course/' + courseId),
+    method: 'get'
+  })
+}
+
+// 根据CourseId获取课程评论
+export function listCommentByCourseId (courseId) {
+  return request({
+    url: requestUrl('course/' + courseId + '/comment'),
+    method: 'get'
+  })
+}
+
+// 根据CourseId获取视频列表
+export function listVideoByCourseId (courseId) {
+  return request({
+    url: requestUrl('course/' + courseId + '/video'),
+    method: 'get'
+  })
+}

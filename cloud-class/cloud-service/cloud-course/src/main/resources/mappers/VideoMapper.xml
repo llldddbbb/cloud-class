@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.dblearn.cloud.course.dao.VideoMapper">
+  <resultMap id="BaseResultMap" type="cn.dblearn.cloud.course.entity.Video">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="chapter" jdbcType="INTEGER" property="chapter" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="course_id" jdbcType="INTEGER" property="courseId" />
+    <result column="video_url" jdbcType="LONGVARCHAR" property="videoUrl" />
+    <result column="cover_image_url" jdbcType="LONGVARCHAR" property="coverImageUrl" />
+  </resultMap>
+
+  <select id="listVideoByCourseId" resultMap="BaseResultMap">
+    select * from video where course_id=#{courseId} order by chapter asc
+  </select>
+</mapper>

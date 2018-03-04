@@ -2,9 +2,12 @@ package cn.dblearn.cloud.course.controller;
 
 import cn.dblearn.cloud.common.entity.Result;
 import cn.dblearn.cloud.course.entity.Course;
+import cn.dblearn.cloud.course.entity.Video;
 import cn.dblearn.cloud.course.service.CourseService;
+import cn.dblearn.cloud.course.service.VideoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -36,5 +39,13 @@ public class CourseController {
         List<Course> hotCourseList=courseService.listHotCourse();
         return Result.ok().put("hotCourseList",hotCourseList);
     }
+
+    @GetMapping("/{courseId}")
+    public Result getCourseById(@PathVariable Integer courseId){
+        Course course=courseService.getCourseById(courseId);
+        return Result.ok().put("course",course);
+    }
+
+
 
 }

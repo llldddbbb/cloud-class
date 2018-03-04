@@ -6,7 +6,7 @@
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="cover_image" jdbcType="VARCHAR" property="coverImage" />
     <result column="description" jdbcType="VARCHAR" property="description" />
-    <result column="page_view" jdbcType="BIGINT" property="pageView" />
+    <result column="attention" jdbcType="BIGINT" property="attention" />
     <result column="price" jdbcType="DOUBLE" property="price" />
     <result column="discount_price" jdbcType="DOUBLE" property="discountPrice" />
     <result column="is_hot" jdbcType="TINYINT" property="isHot" />
@@ -19,7 +19,7 @@
   </resultMap>
 
   <sql id="homeBaseSQL">
-    id,title,cover_image,description,page_view,is_hot,is_boutique
+    id,title,cover_image,description,attention,is_hot,is_boutique
   </sql>
 
   <select id="listRecentCourse" resultMap="BaseResultMap">

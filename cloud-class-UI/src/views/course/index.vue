@@ -4,81 +4,35 @@
       <!--导航条开始-->
       <ol class="breadcrumb">
         <li><a href="courses.html">全部课程</a></li>
-        <li><a href="courses.html?tag=Python">Python</a></li>
-        <li class="active"><a href="courses.html763">Python网络爬虫实战--Scrapy框架学习</a></li>
+        <li><a href="courses.html?tag=Python">{{course.category.categoryName}}</a></li>
+        <li class="active"><a :href="'#/course/'+courseId">{{course.title}}</a></li>
       </ol>
       <!--导航条结束-->
       <div class="row">
         <div class="col-md-9 layout-body">
           <!--封面-->
           <div class="side-image side-image-mobile">
-            <img src="/static/images/1491035890856.png">
+            <img :src="course.coverImage">
           </div>
           <!--课程基本信息-->
           <div class="content course-infobox">
             <div class="clearfix course-infobox-header">
               <h4 class="pull-left course-infobox-title">
-                <span>Python网络爬虫实战--Scrapy框架学习</span>
+                <span>{{course.title}}</span>
               </h4>
               <div class="pull-right course-infobox-follow">
-                <span class="course-infobox-followers">69</span><span>人关注</span>
+                <span class="course-infobox-followers">{{course.attention}}</span><span>人关注</span>
                 <i class="fa fa-star-o"></i>
               </div>
             </div>
             <div class="clearfix course-infobox-body">
               <div class="course-infobox-content">
-                <p>
-                  本训练营从一个简单的Scrapy项目入手，剖析爬虫的结构和Scrapy的运行规则，最后通过两个两个实战项目——「爬取实验楼课程信息」和「爬取电影网站信息」，带领大家从零基础入门，完全掌握使用Scrapy框架编写网络爬虫的技能。</p>
-                <p>课程购买有疑问？</p>
-                <a class="btn btn-success online-consultant" data-toggle="modal" href="#askquestion">在线咨询</a>
+                <p>{{course.description}}</p>
               </div>
-
+              <d-player :options="videoPlayerOptions" ref="player"></d-player>
               <div class="course-infobox-progress">
-                <div class="course-progress-new"></div>
-                <div class="course-progress-new"></div>
-                <div class="course-progress-new"></div>
-                <div class="course-progress-new"></div>
-                <div class="course-progress-new"></div>
-                <div class="course-progress-new"></div>
-                <div class="course-progress-new"></div>
-                <div class="course-progress-new"></div>
-                <div class="course-progress-new"></div>
-                <div class="course-progress-new"></div>
-                <div class="course-progress-new"></div>
-                <div class="course-progress-new"></div>
-                <div class="course-progress-new"></div>
-                <span>（0/13）</span>
-              </div>
-            </div>
-            <div class="clearfix bootcamp-infobox">
-              <div class="bootcamp-infobox-footer">
-                <div class="col-md-3 bootcamp-infobox-msg">
-                  <img src="/static/images/bootcamp-course.png">
-                  <div class="msg-desc"><span>13 个步骤详细的项目实验</span></div>
-                  <img class="bootcamp-infobox-footer-plus" src="/static/images/bootcamp-plus.png">
-                </div>
-
-                <div class="col-md-3 bootcamp-infobox-msg">
-                  <img src="/static/images/bootcamp-env.png">
-                  <div class="msg-desc"><span>最新实用的实战技术</span></div>
-                  <img class="bootcamp-infobox-footer-plus" src="/static/images/bootcamp-plus.png">
-                </div>
-                <div class="col-md-3 bootcamp-infobox-msg">
-                  <img src="/static/images/bootcamp-qa.png">
-                  <div class="msg-desc"><span>有问必答的实验助教</span></div>
-                  <img class="bootcamp-infobox-footer-plus" src="/static/images/bootcamp-equal.png">
-                </div>
-                <div class="col-md-3 bootcamp-infobox-msg bootcamp-infobox-buybox">
-                  <div class="original-price">￥199.00</div>
-                  <div class="member-price">
-<span class="member-price" data-container="body" data-toggle="popover" data-placement="top"
-      data-original-title="会员优惠" data-html="true" data-content="普通会员
-(<span class='price-number'>8折</span>)：<span class='price-number'>￥159.2</span><br>高级会员 (<span class='price-number'>5折</span>)：<span class='price-number'>￥99.5</span>"><a
-  href="vip.html" >会员折扣5折</a></span>
-                  </div>
-                  <div class="bootcamp-infobox-buy">立即购买</div>
-                  <small class="bean-tips">实验豆可抵扣现金</small>
-                </div>
+                <div :class="video.chapter==currentVideo.chapter ? 'course-progress-finished' : 'course-progress-new' "  v-for="video in videoList"></div>
+                <span>（1/{{videoList.length}}）</span>
               </div>
             </div>
           </div>
@@ -97,7 +51,9 @@
             <div class="tab-content">
               <!--课程详情-->
               <div role="tabpanel" class="tab-pane active" id="charge-course-detail">
-                <div class="charge-course-detail-content markdown-box"></div>
+                <div class="charge-course-detail-content markdown-box">
+                  {{course.courseDetail}}
+                </div>
                 <div class="bt-desc-footer">
                   <button class="btn btn-default" onclick="javascript:document.body.scrollTop=0">回到顶部</button>
                   <button class="btn bootcamp-infobox-buy" style="">立即加入</button>
@@ -105,144 +61,25 @@
               </div>
               <!--视频列表-->
               <div role="tabpanel" class="tab-pane " id="labs">
-                <div class="lab-item ">
-                  <div class="lab-item-status">
-                    <img src="/static/images/lab-not-ok.png">
-                  </div>
-                  <div class="lab-item-index">第1节</div>
-                  <div class="lab-item-title" title="Scrapy介绍和环境搭建">Scrapy介绍和环境搭建</div>
+                <div class="lab-item " v-for="video in videoList">
+                  <div class="lab-item-index">第{{video.chapter}}节</div>
+                  <div class="lab-item-title" :title="video.title">{{video.title}}</div>
                   <div class="pull-right lab-item-ctrl">
                     <a class="btn btn-default" href="#sign-modal" data-toggle="modal" data-sign="signin"
                        data-next="courses.html763">查看文档</a>
                     <a class="btn btn-primary" href="#sign-modal" data-toggle="modal" data-sign="signin"
-                       data-next="courses.html763">开始实验</a>
-                  </div>
-                </div>
-                <div class="lab-item ">
-                  <div class="lab-item-status">
-                    <img src="/static/images/lab-not-ok.png">
-                  </div>
-                  <div class="lab-item-index">第2节</div>
-                  <div class="lab-item-title" title="简单Scrapy项目运行和剖析">简单Scrapy项目运行和剖析</div>
-                  <div class="pull-right lab-item-ctrl">
-                  </div>
-                </div>
-                <div class="lab-item ">
-                  <div class="lab-item-status">
-                    <img src="/static/images/lab-not-ok.png">
-                  </div>
-                  <div class="lab-item-index">第3节</div>
-                  <div class="lab-item-title" title="常用的Python爬虫库及脚本爬虫">常用的Python爬虫库及脚本爬虫</div>
-                  <div class="pull-right lab-item-ctrl">
-                  </div>
-                </div>
-                <div class="lab-item ">
-                  <div class="lab-item-status">
-                    <img src="/static/images/lab-not-ok.png">
-                  </div>
-                  <div class="lab-item-index">第4节</div>
-                  <div class="lab-item-title" title="拓展脚本爬虫，爬取全部课程链接（一）">拓展脚本爬虫，爬取全部课程链接（一）</div>
-                  <div class="pull-right lab-item-ctrl">
-                  </div>
-                </div>
-                <div class="lab-item ">
-                  <div class="lab-item-status">
-                    <img src="/static/images/lab-not-ok.png">
-                  </div>
-                  <div class="lab-item-index">第5节</div>
-                  <div class="lab-item-title" title="拓展脚本爬虫，爬取全部课程信息（二）">拓展脚本爬虫，爬取全部课程信息（二）</div>
-                  <div class="pull-right lab-item-ctrl">
-                  </div>
-                </div>
-                <div class="lab-item ">
-                  <div class="lab-item-status">
-                    <img src="/static/images/lab-not-ok.png">
-                  </div>
-                  <div class="lab-item-index">第6节</div>
-                  <div class="lab-item-title" title="拓展脚本爬虫，存储和挖掘数据（三）">拓展脚本爬虫，存储和挖掘数据（三）</div>
-                  <div class="pull-right lab-item-ctrl">
-                  </div>
-                </div>
-                <div class="lab-item ">
-                  <div class="lab-item-status">
-                    <img src="/static/images/lab-not-ok.png">
-                  </div>
-                  <div class="lab-item-index">第7节</div>
-                  <div class="lab-item-title" title="练习项目：脚本爬虫项目实战">练习项目：脚本爬虫项目实战</div>
-                  <div class="pull-right lab-item-ctrl">
-                  </div>
-                </div>
-                <div class="lab-item ">
-                  <div class="lab-item-status">
-                    <img src="/static/images/lab-not-ok.png">
-                  </div>
-                  <div class="lab-item-index">第8节</div>
-                  <div class="lab-item-title" title="Scrapy项目之电影信息抓取（一）">Scrapy项目之电影信息抓取（一）</div>
-                  <div class="pull-right lab-item-ctrl">
-                  </div>
-                </div>
-                <div class="lab-item ">
-                  <div class="lab-item-status">
-                    <img src="/static/images/lab-not-ok.png">
-                  </div>
-                  <div class="lab-item-index">第9节</div>
-                  <div class="lab-item-title" title="Scrapy项目之电影信息抓取（二）">Scrapy项目之电影信息抓取（二）</div>
-                  <div class="pull-right lab-item-ctrl">
-                  </div>
-                </div>
-                <div class="lab-item ">
-                  <div class="lab-item-status">
-                    <img src="/static/images/lab-not-ok.png">
-                  </div>
-                  <div class="lab-item-index">第10节</div>
-                  <div class="lab-item-title" title="Scrapy项目之电影信息抓取（三）">Scrapy项目之电影信息抓取（三）</div>
-                  <div class="pull-right lab-item-ctrl">
-                  </div>
-                </div>
-                <div class="lab-item ">
-                  <div class="lab-item-status">
-                    <img src="/static/images/lab-not-ok.png">
-                  </div>
-                  <div class="lab-item-index">第11节</div>
-                  <div class="lab-item-title" title="Scrapy项目之电影信息抓取（四）">Scrapy项目之电影信息抓取（四）</div>
-                  <div class="pull-right lab-item-ctrl">
-                  </div>
-                </div>
-                <div class="lab-item ">
-                  <div class="lab-item-status">
-                    <img src="/static/images/lab-not-ok.png">
-                  </div>
-                  <div class="lab-item-index">第12节</div>
-                  <div class="lab-item-title" title="Scrapy项目之多爬虫项目（五）">Scrapy项目之多爬虫项目（五）</div>
-                  <div class="pull-right lab-item-ctrl">
-                  </div>
-                </div>
-                <div class="lab-item ">
-                  <div class="lab-item-status">
-                    <img src="/static/images/lab-not-ok.png">
-                  </div>
-                  <div class="lab-item-index">第13节</div>
-                  <div class="lab-item-title" title="练习项目：Scrapy项目实战--文章爬取">练习项目：Scrapy项目实战--文章爬取</div>
-                  <div class="pull-right lab-item-ctrl">
+                       data-next="courses.html763">开始学习</a>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <!--评论报告问答-->
+          <!--评论-->
           <div class="content">
             <ul class="nav nav-tabs" role="tablist">
               <li role="presentation" class="active">
                 <a href="#comments" class="stat-event" aria-controls="comments" role="tab" data-stat="course_comment"
                    data-toggle="tab">课程评论(22)</a>
-              </li>
-              <li role="presentation">
-                <a href="#reports" class="stat-event" data-stat="course_report" aria-controls="reports" role="tab"
-                   data-toggle="tab">实验报告(20)</a>
-              </li>
-              <li role="presentation">
-                <a href="#questions" class="stat-event" data-stat="course_question" aria-controls="questions" role="tab"
-                   data-toggle="tab">实验问答(40)</a>
               </li>
             </ul>
             <div class="tab-content">
@@ -251,61 +88,40 @@
                 <div class="comment-box">
                   <div class="comment-form">
                     <div class="comment-form-unlogin">
-                      请
-                      <a href="#sign-modal" data-toggle="modal" data-sign="signin" data-next="courses.html763"> 登录 </a>
+                      请<a href="#sign-modal" data-toggle="modal" data-sign="signin" data-next="courses.html763"> 登录 </a>
                       后发表评论
                     </div>
-
                   </div>
                   <div class="comment-title">最新评论</div>
+                  <!--评论列表-->
                   <div class="comment-list">
+                    <div class="row comment-list-item" v-for="comment in commentList">
+                      <div class="col-md-1">
+                        <div class="user-avatar">
+                          <a class="avatar" :href="'/user/'+comment.user.id" target="_blank">
+                            <img :src="comment.user.avatar" />
+                          </a>
+                        </div>
+                      </div>
+                      <div class="col-md-11 comment-item-body">
+                        <div class="user-username">
+                          <a class="username" :href="'/user/'+comment.user.id" target="_blank">
+                            {{comment.user.nickname}}
+                          </a>
+                          <span class="user-level">L20</span>
+                        </div>
+                        <div class="comment-item-content markdown-box" style="word-wrap: break-word;"><p>{{comment.content}}</p>
+                        </div>
+                        <div class="assistant-wrapper">
+                          <div class="comment-item-date">1 个月前</div>
+                          <div class="comment-item-reply">
+                            <a href="#sign-modal" data-toggle="modal" data-sign="signin"><img
+                            src="/static/images/icon-reply.png" alt="">回复</a></div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <div class="pagination-container"></div>
                 </div>
-              </div>
-              <!--报告-->
-              <div role="tabpanel" class="tab-pane" id="reports">
-                <span class="lab-id active" data-lab-id="None">全部</span>
-
-                <span class="lab-id" data-lab-id="2555">第1节</span>
-
-                <span class="lab-id" data-lab-id="2556">第2节</span>
-
-                <span class="lab-id" data-lab-id="2559">第3节</span>
-
-                <span class="lab-id" data-lab-id="2561">第4节</span>
-
-                <span class="lab-id" data-lab-id="2566">第5节</span>
-
-                <span class="lab-id" data-lab-id="2567">第6节</span>
-
-                <span class="lab-id" data-lab-id="2569">第7节</span>
-
-                <span class="lab-id" data-lab-id="2570">第8节</span>
-
-                <span class="lab-id" data-lab-id="2571">第9节</span>
-
-                <span class="lab-id" data-lab-id="2572">第10节</span>
-
-                <span class="lab-id" data-lab-id="2573">第11节</span>
-
-                <span class="lab-id" data-lab-id="2574">第12节</span>
-
-                <span class="lab-id" data-lab-id="2622">第13节</span>
-
-                <div class="report-owner">
-                  <span class="owner-list" data-user-id="">我的报告</span> / <span class="owner-list active"
-                                                                               data-user-id="None">所有报告</span>
-                </div>
-                <div class="row report-items"></div>
-                <div class="pagination-container"></div>
-              </div>
-              <!--问答-->
-              <div role="tabpanel" class="tab-pane" id="questions">
-                <a class="btn btn-success" data-toggle="modal" href="#askquestion">我要提问</a>
-                <hr>
-                <ul class="row question-items"></ul>
-                <div class="pagination-container"></div>
               </div>
             </div>
           </div>
@@ -313,7 +129,7 @@
         <!--侧边栏开始-->
         <div class="col-md-3 layout-side">
           <div class="side-image side-image-pc">
-            <img src="/static/images/1490341573313.png">
+            <img :src="course.coverImage">
           </div>
           <div class="sidebox mooc-teacher">
             <div class="sidebox-header mooc-header">
@@ -463,8 +279,73 @@
 </template>
 
 <script>
+import API from '@/api'
+import dPlayer from 'vue-dplayer'
+import '../../../node_modules/dplayer/dist/DPlayer.min.css'
 export default {
-  name: 'index'
+  name: 'index',
+  // 路由传来的参数
+  props: ['courseId'],
+  data () {
+    return {
+      course: {
+        category: {}
+      },
+      commentList: [],
+      videoList: [],
+      videoPlayerOptions: {
+        autoplay: false
+      },
+      currentVideo: {}
+    }
+  },
+  components: {
+    dPlayer
+  },
+  created () {
+    this.getCourseDetailById()
+    this.listCommentByCourseId()
+    this.listVideoByCourseId()
+  },
+  methods: {
+    getCourseDetailById () {
+      API.course.getCourseDetailById(this.courseId).then(({data}) => {
+        if (data && data.code === 200) {
+          this.course = data.course
+        }
+      })
+    },
+    listCommentByCourseId () {
+      API.course.listCommentByCourseId(this.courseId).then(({data}) => {
+        if (data && data.code === 200) {
+          this.commentList = data.commentList
+        }
+      })
+    },
+    listVideoByCourseId () {
+      API.course.listVideoByCourseId(this.courseId).then(({data}) => {
+        if (data && data.code === 200) {
+          this.videoList = data.videoList
+          this.initVideoData()
+        }
+      })
+    },
+    initVideoData () {
+      this.currentVideo = this.videoList[0]
+      this.videoPlayerOptions = {
+        video: {
+          url: this.currentVideo.videoUrl,
+          pic: this.currentVideo.coverImageUrl
+        },
+        autoplay: false
+      }
+      this.player = this.$refs.player.dp
+      this.player.switchVideo({
+        url: this.currentVideo.videoUrl,
+        pic: this.currentVideo.coverImageUrl
+      })
+    }
+  }
 }
 </script>
 

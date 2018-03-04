@@ -4685,7 +4685,8 @@ i {
     width: 18px;
     height: 18px;
     border-radius: 2px;
-    vertical-align: middle
+    vertical-align: middle;
+    margin-right: 4px;
 }
 
 .course-infobox-progress .course-progress-finished {

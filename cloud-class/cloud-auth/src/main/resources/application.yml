@@ -11,10 +11,8 @@ spring:
     url: jdbc:mysql://localhost:3306/cloud_auth?autoReconnect=true&useSSL=false
     username: root
     password: 123456
-
-  jpa:
-    database-platform: org.hibernate.dialect.MySQL5Dialect
-
+mybatis:
+    mapperLocations: classpath:mappers/*.xml
 jwt:
   header: Authorization
   secret: mySecret

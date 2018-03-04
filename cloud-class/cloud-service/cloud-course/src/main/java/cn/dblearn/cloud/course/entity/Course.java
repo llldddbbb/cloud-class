@@ -2,6 +2,7 @@ package cn.dblearn.cloud.course.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 import java.util.Date;
 
 public class Course {
@@ -28,10 +29,10 @@ public class Course {
     private String description;
 
     /**
-     * 浏览量
+     * 关注量
      */
-    @Column(name = "page_view")
-    private Long pageView;
+    @Column(name = "attention")
+    private Long attention;
 
     /**
      * 价格
@@ -85,6 +86,9 @@ public class Course {
      */
     @Column(name = "course_detail")
     private String courseDetail;
+
+    @Transient
+    private Category category;
 
     /**
      * 获取主键
@@ -159,21 +163,21 @@ public class Course {
     }
 
     /**
-     * 获取浏览量
+     * 获取关注量
      *
-     * @return page_view - 浏览量
+     * @return attention - 关注量
      */
-    public Long getPageView() {
-        return pageView;
+    public Long getAttention() {
+        return attention;
     }
 
     /**
-     * 设置浏览量
+     * 设置关注量
      *
-     * @param pageView 浏览量
+     * @param attention 关注量
      */
-    public void setPageView(Long pageView) {
-        this.pageView = pageView;
+    public void setAttention(Long attention) {
+        this.attention = attention;
     }
 
     /**
@@ -316,5 +320,13 @@ public class Course {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }

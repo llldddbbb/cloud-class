@@ -3,6 +3,7 @@ package cn.dblearn.cloud.auth;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.cloud.netflix.feign.EnableFeignClients;
 
 /**
  * @author Bobbi
@@ -10,6 +11,7 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
  */
 @SpringBootApplication
 @EnableEurekaClient
+@EnableFeignClients
 public class AuthApplication {
 
     public static void main(String[] args) {

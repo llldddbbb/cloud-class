@@ -1,6 +1,5 @@
 <template>
-  <!--v-cloak解决刷新闪烁-->
-  <div v-cloak>
+  <div>
     <!--main开始-->
     <div class="layout layout-margin-top layout-fullscreen">
       <!--轮播开始-->
@@ -55,13 +54,13 @@
             <div class="tab-pane fade" id="boutique-course">
               <div class="row">
                 <div class="col-md-3" v-for="boutiqueCourse in boutiqueCourseList">
-                  <a class="recommend-courses-item" href="courses.html1">
+                  <a class="recommend-courses-item" :href="'#/course/'+boutiqueCourse.id">
                     <img :src="boutiqueCourse.coverImage" :alt="boutiqueCourse.title">
                     <div class="recommend-courses-content">
                       <div class="recommend-courses-name">{{boutiqueCourse.title}}</div>
                       <div class="recommend-courses-desc">{{boutiqueCourse.description}}</div>
                       <div class="recommend-courses-users">
-                        <i class="fa fa-users"></i>{{boutiqueCourse.pageView}}
+                        <i class="fa fa-users"></i>{{boutiqueCourse.attention}}
                       </div>
                     </div>
                   </a>
@@ -75,13 +74,13 @@
             <div class="tab-pane fade in active" id="recent-course">
               <div class="row">
                 <div class="col-md-3" v-for="recentCourse in recentCourseList">
-                  <a class="recommend-courses-item" href="#/course/detail">
+                  <a class="recommend-courses-item" :href="'#/course/'+recentCourse.id">
                     <img :src="recentCourse.coverImage" :alt="recentCourse.title">
                     <div class="recommend-courses-content">
                       <div class="recommend-courses-name">{{recentCourse.title}}</div>
                       <div class="recommend-courses-desc">{{recentCourse.description}}</div>
                       <div class="recommend-courses-users">
-                        <i class="fa fa-users"></i>{{recentCourse.pageView}}
+                        <i class="fa fa-users"></i>{{recentCourse.attention}}
                       </div>
                     </div>
                   </a>
@@ -95,13 +94,13 @@
             <div class="tab-pane fade" id="hot-course">
               <div class="row">
                 <div class="col-md-3" v-for="hotCourse in hotCourseList">
-                  <a class="recommend-courses-item" href="courses.html1">
+                  <a class="recommend-courses-item" :href="'#/course/'+hotCourse.id">
                     <img :src="hotCourse.coverImage" :alt="hotCourse.title">
                     <div class="recommend-courses-content">
                       <div class="recommend-courses-name">{{hotCourse.title}}</div>
                       <div class="recommend-courses-desc">{{hotCourse.description}}</div>
                       <div class="recommend-courses-users">
-                        <i class="fa fa-users"></i>{{hotCourse.pageView}}
+                        <i class="fa fa-users"></i>{{hotCourse.attention}}
                       </div>
                     </div>
                   </a>

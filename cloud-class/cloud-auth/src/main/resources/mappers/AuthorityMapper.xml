@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.dblearn.cloud.auth.dao.AuthorityMapper">
+  <resultMap id="BaseResultMap" type="cn.dblearn.cloud.auth.entity.Authority">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+  </resultMap>
+
+  <select id="listAuthorityByUserId" resultMap="BaseResultMap">
+     SELECT a.* FROM authority a LEFT JOIN user_authority ua ON ua.`authority_id`=a.`id` WHERE ua.`user_id`=#{userId}
+  </select>
+</mapper>

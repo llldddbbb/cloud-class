@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <!--v-cloak解决刷新闪烁-->
+  <div v-cloak>
     <!--导航开始-->
     <nav-menu></nav-menu>
     <!--导航结束-->
@@ -22,6 +23,7 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style>
+  /*全局自定义的css样式*/
+  @import '../../assets/css/styles.css';
 </style>

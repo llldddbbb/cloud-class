@@ -1,7 +1,7 @@
 package cn.dblearn.cloud.auth.security;
 
-import cn.dblearn.cloud.auth.model.Authority;
-import cn.dblearn.cloud.auth.model.User;
+import cn.dblearn.cloud.auth.entity.Authority;
+import cn.dblearn.cloud.user.entity.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
@@ -17,19 +17,20 @@ public final class JwtUserFactory {
         return new JwtUser(
                 user.getId(),
                 user.getUsername(),
-                user.getFirstname(),
-                user.getLastname(),
+                user.getNickname(),
+                user.getMobile(),
                 user.getEmail(),
                 user.getPassword(),
                 mapToGrantedAuthorities(user.getAuthorities()),
                 user.getEnabled(),
-                user.getLastPasswordResetDate()
+                user.getPublishTime(),
+                user.getUpdateTime()
         );
     }
 
     private static List<GrantedAuthority> mapToGrantedAuthorities(List<Authority> authorities) {
         return authorities.stream()
-                .map(authority -> new SimpleGrantedAuthority(authority.getName().name()))
+                .map(authority -> new SimpleGrantedAuthority(authority.getName()))
                 .collect(Collectors.toList());
     }
 }

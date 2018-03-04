@@ -14,33 +14,36 @@ public class JwtUser implements UserDetails {
 
     private final Long id;
     private final String username;
-    private final String firstname;
-    private final String lastname;
+    private final String nickname;
+    private final String mobile;
     private final String password;
     private final String email;
     private final Collection<? extends GrantedAuthority> authorities;
     private final boolean enabled;
-    private final Date lastPasswordResetDate;
+    private final Date publishTime;
+    private final Date updateTime;
 
     public JwtUser(
-          Long id,
+            Long id,
           String username,
-          String firstname,
-          String lastname,
+          String nickname,
+          String mobile,
           String email,
           String password, Collection<? extends GrantedAuthority> authorities,
           boolean enabled,
-          Date lastPasswordResetDate
+          Date publishTime,
+          Date updateTime
     ) {
         this.id = id;
         this.username = username;
-        this.firstname = firstname;
-        this.lastname = lastname;
+        this.nickname = nickname;
+        this.mobile = mobile;
         this.email = email;
         this.password = password;
         this.authorities = authorities;
         this.enabled = enabled;
-        this.lastPasswordResetDate = lastPasswordResetDate;
+        this.publishTime = publishTime;
+        this.updateTime = updateTime;
     }
 
     @JsonIgnore
@@ -71,12 +74,12 @@ public class JwtUser implements UserDetails {
         return true;
     }
 
-    public String getFirstname() {
-        return firstname;
+    public String getNickname() {
+        return nickname;
     }
 
-    public String getLastname() {
-        return lastname;
+    public String getMobile() {
+        return mobile;
     }
 
     public String getEmail() {
@@ -100,7 +103,11 @@ public class JwtUser implements UserDetails {
     }
 
     @JsonIgnore
-    public Date getLastPasswordResetDate() {
-        return lastPasswordResetDate;
+    public Date getPublishTime() {
+        return publishTime;
+    }
+    @JsonIgnore
+    public Date getUpdateTime() {
+        return updateTime;
     }
 }

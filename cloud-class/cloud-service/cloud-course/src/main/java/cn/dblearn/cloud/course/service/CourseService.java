@@ -19,6 +19,9 @@ public class CourseService {
     @Autowired
     private CourseMapper courseMapper;
 
+    @Autowired
+    private CategoryService categoryService;
+
     @Value("${home.course.pageSize}")
     private Integer pageSize;
 
@@ -35,5 +38,11 @@ public class CourseService {
     public List<Course> listHotCourse() {
         PageHelper.startPage(1,pageSize);
         return courseMapper.listHotCourse();
+    }
+
+    public Course getCourseById(Integer courseId) {
+        Course course = courseMapper.selectByPrimaryKey(courseId);
+        course.setCategory(categoryService.getCategoryById(course.getCategoryId()));
+        return course;
     }
 }

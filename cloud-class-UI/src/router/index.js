@@ -16,7 +16,7 @@ export default new Router({
       desc: '上下布局',
       children: [
         { path: '/home', component: _import('home/index'), name: 'home', desc: '首页' },
-        { path: '/course', component: _import('course/index'), name: 'home', desc: '课程详情页' }
+        { path: '/course/:courseId', component: _import('course/index'), name: 'course', props: true, desc: '课程详情页' }
       ]
     }
   ]
